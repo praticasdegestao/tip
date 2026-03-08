@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Termo de Intenção de Projetos (TIP)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Tela de Login -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <img src="embrapa.JPG" alt="Logo Embrapa" class="logo-embrapa" onerror="this.style.display='none'">
+                <h1>Gestão de Termo de Intenção de Projetos (TIP)</h1>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" name="username" required placeholder="Digite seu login">
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" required placeholder="Digite sua senha">
+                </div>
+                <button type="submit" class="btn-login">Entrar</button>
+            </form>
+            <div id="loginError" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Tela Principal -->
+    <div id="mainScreen" class="main-container" style="display: none;">
+        <!-- Menu Lateral -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="embrapa.JPG" alt="Logo Embrapa" class="logo-sidebar" onerror="this.style.display='none'">
+                <h2>Menu Principal</h2>
+            </div>
+            <ul class="menu-list">
+                <li class="menu-item" data-page="fluxo">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Fluxo do Processo</span>
+                </li>
+                <li class="menu-item" data-page="formulario">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Formulário do TIP</span>
+                </li>
+                <li class="menu-item" data-page="lista">
+                    <i class="fas fa-list"></i>
+                    <span>Lista dos TIPs</span>
+                </li>
+                <li class="menu-item has-submenu" data-page="cadastros">
+                    <i class="fas fa-database"></i>
+                    <span>Cadastros</span>
+                    <i class="fas fa-chevron-down submenu-arrow"></i>
+                </li>
+                <ul class="submenu" id="submenuCadastros">
+                    <li class="submenu-item" data-cadastro="usuarios">
+                        <i class="fas fa-users"></i> Usuários
+                    </li>
+                    <li class="submenu-item" data-cadastro="instituicoes">
+                        <i class="fas fa-building"></i> Instituições Parceiras
+                    </li>
+                    <li class="submenu-item" data-cadastro="fontes">
+                        <i class="fas fa-money-bill"></i> Fonte Financiadora
+                    </li>
+                    <li class="submenu-item" data-cadastro="resultados">
+                        <i class="fas fa-trophy"></i> Tipo de Resultado
+                    </li>
+                    <li class="submenu-item" data-cadastro="portfolios">
+                        <i class="fas fa-briefcase"></i> Portfolio
+                    </li>
+                    <li class="submenu-item" data-cadastro="desafios">
+                        <i class="fas fa-lightbulb"></i> Desafios de Inovação
+                    </li>
+                    <li class="submenu-item" data-cadastro="compromissos">
+                        <i class="fas fa-handshake"></i> Compromisso
+                    </li>
+                </ul>
+            </ul>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="loggedUser">Usuário</span>
+                </div>
+                <button id="btnLogout" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
+            </div>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <main class="content">
+            <header class="content-header">
+                <h1 id="pageTitle">Bem-vindo ao Sistema TIP</h1>
+            </header>
+            <div id="pageContent" class="content-body">
+                <!-- Conteúdo dinâmico será carregado aqui -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Genérico -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Título do Modal</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div id="modalBody" class="modal-body">
+                <!-- Conteúdo do modal -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Parecer -->
+    <div id="modalParecer" class="modal">
+        <div class="modal-content modal-parecer">
+            <div class="modal-header">
+                <h3 id="modalParecerTitle">Registrar Parecer</h3>
+                <span class="modal-close-parecer">&times;</span>
+            </div>
+            <div id="modalParecerBody" class="modal-body">
+                <!-- Conteúdo do parecer -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Histórico -->
+    <div id="modalHistorico" class="modal">
+        <div class="modal-content modal-historico">
+            <div class="modal-header">
+                <h3>Localização e Histórico do TIP</h3>
+                <span class="modal-close-historico">&times;</span>
+            </div>
+            <div id="modalHistoricoBody" class="modal-body">
+                <!-- Conteúdo do histórico -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Seleção de Gestor -->
+    <div id="modalGestor" class="modal">
+        <div class="modal-content modal-gestor">
+            <div class="modal-header">
+                <h3>Selecionar Gestor</h3>
+                <span class="modal-close-gestor">&times;</span>
+            </div>
+            <div id="modalGestorBody" class="modal-body">
+                <div class="form-group">
+                    <label>Selecione o Gestor:</label>
+                    <select id="selectGestorModal" class="form-control"></select>
+                </div>
+                <div class="modal-actions">
+                    <button id="btnConfirmarGestor" class="btn btn-primary">Confirmar Envio</button>
+                    <button id="btnCancelarGestor" class="btn btn-secondary">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Seleção de Ad Hoc -->
+    <div id="modalAdHoc" class="modal">
+        <div class="modal-content modal-adhoc">
+            <div class="modal-header">
+                <h3>Enviar para Ad Hoc</h3>
+                <span class="modal-close-adhoc">&times;</span>
+            </div>
+            <div id="modalAdHocBody" class="modal-body">
+                <div class="form-group">
+                    <label>Selecione os revisores Ad Hoc:</label>
+                    <div id="checkboxAdHocList" class="checkbox-list"></div>
+                </div>
+                <div class="modal-actions">
+                    <button id="btnConfirmarAdHoc" class="btn btn-primary">Confirmar Envio</button>
+                    <button id="btnCancelarAdHoc" class="btn btn-secondary">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Visualização -->
+    <div id="modalVisualizacao" class="modal">
+        <div class="modal-content modal-visualizacao">
+            <div class="modal-header">
+                <h3 id="modalVisualizacaoTitle">Visualizar TIP</h3>
+                <span class="modal-close-visualizacao">&times;</span>
+            </div>
+            <div id="modalVisualizacaoBody" class="modal-body">
+                <!-- Conteúdo da visualização -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
