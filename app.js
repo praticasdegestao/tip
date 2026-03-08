@@ -287,7 +287,7 @@ function showFluxoProcesso() {
     document.getElementById('pageTitle').textContent = 'Fluxo do Processo';
     document.getElementById('pageContent').innerHTML = `
         <div class="fluxo-container fade-in">
-            <img src="processotip.PNG" alt="Fluxo do Processo TIP" onerror="this.parentElement.innerHTML='<p style=\\'color: var(--cinza-escuro); text-align: center;\\'>Imagem do fluxo não encontrada (processotip.PNG)</p>'">
+            <img src="processotip.png" alt="Fluxo do Processo TIP" onerror="this.parentElement.innerHTML='<p style=\\'color: var(--cinza-escuro); text-align: center;\\'>Imagem do fluxo não encontrada (processotip.PNG)</p>'">
         </div>
     `;
 }
